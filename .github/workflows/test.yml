@@ -1,0 +1,14 @@
+name: Run Shell Script Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリのチェックアウト
+        uses: actions/checkout@v3
+
+      - name: テストスクリプトの実行
+        run: ./test-koyakusu.sh
