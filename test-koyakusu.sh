@@ -35,8 +35,11 @@ test-koyakusu() {
 test-koyakusu 6 54 24
 test-koyakusu 1 17 13
 test-koyakusu 5 10 5
+test-koyakusu 3 -10 12
+test-koyakusu 3 99999999999 9
 test-koyakusu 3 0 48
-test-koyakusu 3 12 
+test-koyakusu 3 12
+test-koyakusu 3 6 12 15
 test-koyakusu 3 15.5 18
 test-koyakusu 3 a 18
 
