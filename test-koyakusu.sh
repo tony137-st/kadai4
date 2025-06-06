@@ -60,7 +60,7 @@ echo "テストが終了しました。"
 # 全結果の判定
 if [ $error_count -ne 0 ]; then
     echo "⚠️ $error_count 件のテストケースでエラーが発生しました。"
-    exit 0  #GitHub Actions上でもエラー終了させる。
+    exit 1  #GitHub Actions上でもエラー終了させる。
 else
     echo "✅ 全てのテストケースが正常に終了しました。"
 fi
