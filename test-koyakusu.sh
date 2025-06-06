@@ -15,7 +15,7 @@ test-koyakusu() {
     # 引数の数をチェック
     if [ "$num_args" -ne 2 ]; then
         echo "❌ エラー: 引数の数が不正です。"
-        echo "$expected"  # 算定用スクリプトのエラーメッセージを表示
+        echo "$output"  # 算定用スクリプトのエラーメッセージを表示
         error_count=$((error_count + 1))
         return
     fi
