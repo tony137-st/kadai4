@@ -11,17 +11,6 @@ test-koyakusu() {
     expected=$1
     num1=$2
     num2=$3
-    shift
-    args("$@")
-
-    # 引数の数が適切でない場合はエラー判定
-    if [ "${#args[@]}" -ne 2 ]; then
-        echo "❌ エラー: 引数の数が誤っています。（入力数: ${#args[@]}）"
-        error_count=$((error_count + 1))
-        return 1
-    fi
-    output=$(bash koyakusu.sh "${args[@]}" 2>&1)
-    exit_code=$?
 
     # koyakusu.sh を実行し、テスト結果とエラーをキャプチャ
     output=$(bash koyakusu.sh "$num1" "$num2" 2>&1)
