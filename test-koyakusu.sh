@@ -14,7 +14,7 @@ test-koyakusu() {
 
     # 引数の数をチェック（expect なしで num1, num2 のみを確認）
     if [ "$#" -ne 3 ]; then
-        echo "❌ エラー: 引数の数が不正です。（入力数: $#）"
+#        echo "❌ エラー: 引数の数が不正です。（入力数: $#）"
         error_count=$((error_count + 1))
         return
     fi
@@ -43,7 +43,7 @@ test-koyakusu 6 54 24
 test-koyakusu 1 17 13
 test-koyakusu 5 10 5
 test-koyakusu 3 -10 12
-test-koyakusu 3 99999999999 9
+test-koyakusu 9 99999999999 9
 test-koyakusu 3 0 48
 test-koyakusu 3 12
 test-koyakusu 3 6 12 15
