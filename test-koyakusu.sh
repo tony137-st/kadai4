@@ -20,13 +20,13 @@ test-koyakusu() {
     result=$(echo "$output" | awk '{print $2}')
 
     if [ $exit_code -ne 0 ]; then
-        echo "× エラー: KOYAKUSU($num1, $num2) の実行に失敗しました。詳細:"
+        echo "❌ エラー: KOYAKUSU($num1, $num2) の実行に失敗しました。詳細:"
         echo "$output"
         error_count=$((error_count + 1))
     elif [ "$result" -eq "$expected" ]; then
-        echo "● OK: KOYAKUSU($num1, $num2) = $expected"
+        echo "✅ OK: KOYAKUSU($num1, $num2) = $expected"
     else
-        echo "× NG: KOYAKUSU($num1, $num2) の結果が正解値と異なる: $result"
+        echo "❌ NG: KOYAKUSU($num1, $num2) の結果が正解値と異なります: $result"
         error_count=$((error_count + 1))
     fi
 }
@@ -36,6 +36,7 @@ test-koyakusu 6 54 24
 test-koyakusu 1 17 13
 test-koyakusu 5 10 5
 test-koyakusu 3 0 48
+test-koyakusu 3 12 
 test-koyakusu 3 15.5 18
 test-koyakusu 3 a 18
 
@@ -43,8 +44,8 @@ echo "テストが終了しました。"
 
 # 全結果の判定
 if [ $error_count -ne 0 ]; then
-    echo "★ $error_count 件のテストケースでエラーが発生しました。"
+    echo "⚠️ $error_count 件のテストケースでエラーが発生しました。"
     exit 0  #GitHub Actions上では正常終了させる。
 else
-    echo "● 全てのテストケースが正常に終了しました。"
+    echo "✅ 全てのテストケースが正常に終了しました。"
 fi
