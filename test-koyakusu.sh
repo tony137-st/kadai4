@@ -11,24 +11,21 @@ test-koyakusu() {
     expected=$1
     shift
     num_args=$#
-#num1=$2
-#num2=$3
 
-    # 引数の数をチェック（expect なしで num1, num2 のみを確認）
-    if [ "$#" -ne 3 ]; then
+    # 引数の数をチェック
+    if [ "$num_args" -ne 2 ]; then
 #        echo "❌ エラー: 引数の数が不正です。"
         error_count=$((error_count + 1))
         return
     fi
 
     # koyakusu.sh を実行し、テスト結果とエラーをキャプチャ
-#    output=$(bash koyakusu.sh "$num1" "$num2" 2>&1)
     output=$(bash koyakusu.sh "$@" 2>&1)
     exit_code=$?
 
     if [ $exit_code -ne 0 ]; then
         echo "❌ エラー: KOYAKUSU($1, $2) の実行に失敗しました。詳細:"
-        echo "$output"  # ここで算定用スクリプトのエラーメッセージを確実に表示
+        echo "$output"  # 算定用スクリプトのエラーメッセージを表示
         error_count=$((error_count + 1))
         return
     fi
