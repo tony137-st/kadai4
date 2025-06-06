@@ -12,6 +12,13 @@ test-koyakusu() {
     num1=$2
     num2=$3
 
+    # 引数の数をチェック（expect なしで num1, num2 のみを確認）
+    if [ "$#" -ne 3 ]; then
+        echo "❌ エラー: 引数の数が不正です。（入力数: $#）"
+        error_count=$((error_count + 1))
+        return
+    fi
+
     # koyakusu.sh を実行し、テスト結果とエラーをキャプチャ
     output=$(bash koyakusu.sh "$num1" "$num2" 2>&1)
     exit_code=$?
@@ -48,7 +55,7 @@ echo "テストが終了しました。"
 # 全結果の判定
 if [ $error_count -ne 0 ]; then
     echo "⚠️ $error_count 件のテストケースでエラーが発生しました。"
-    exit 0  #GitHub Actions上では正常終了させる。
+    exit 0  #GitHub Actions上でもエラー終了させる。
 else
     echo "✅ 全てのテストケースが正常に終了しました。"
 fi
