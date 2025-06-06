@@ -16,7 +16,7 @@ test-koyakusu() {
 
     # 引数の数をチェック（expect なしで num1, num2 のみを確認）
     if [ "$#" -ne 3 ]; then
-#        echo "❌ エラー: 引数の数が不正です。（入力数: $#）"
+#        echo "❌ エラー: 引数の数が不正です。"
         error_count=$((error_count + 1))
         return
     fi
@@ -26,19 +26,23 @@ test-koyakusu() {
     output=$(bash koyakusu.sh "$@" 2>&1)
     exit_code=$?
 
+    if [ $exit_code -ne 0 ]; then
+        echo "❌ エラー: KOYAKUSU($1, $2) の実行に失敗しました。詳細:"
+        echo "$output"  # ここで算定用スクリプトのエラーメッセージを確実に表示
+        error_count=$((error_count + 1))
+        return
+    fi
+
     # テスト成功時の結果を抽出
     result=$(echo "$output" | awk '{print $2}')
 
-    if [ $exit_code -ne 0 ]; then
-        echo "❌ エラー: KOYAKUSU($1, $2) の実行に失敗しました。詳細:"
-        echo "$output"
-        error_count=$((error_count + 1))
-    elif [ "$result" -eq "$expected" ]; then
+    if [[ "$result" =~ ^[0-9]+$ ]] && [ "$result" -eq "$expected" ]; then
         echo "✅ OK: KOYAKUSU($1, $2) = $expected"
     else
         echo "❌ NG: KOYAKUSU($1, $2) の結果が正解値と異なります: $result"
         error_count=$((error_count + 1))
     fi
+
 }
 
 # テストケース（最大公約数、引数1、引数2を入力し、テストを実行）
