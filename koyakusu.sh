@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 引数のチェック
-if [ $# -ne 2 ]; then
+if [ "$#" -ne 2 ]; then
     echo "エラー: 2つの引数を入力してください。（入力数: $#）"
     echo "使用方法: $0 <自然数1> <自然数2>"
     exit 1
@@ -20,7 +20,7 @@ for arg in "$1" "$2"; do
             echo "エラー: 数値以外の文字列が入力されました。（入力値: $arg）"
         fi
         error_flag=1
-    elif [ "$arg" -gt 999999999999 ]; then
+    elif [ "$arg" -gt 9999999999 ]; then
         echo "警告: 入力値が極めて大きい可能性があります。（入力値: $arg）"
     elif [ "$arg" -eq 0 ]; then
         echo "エラー: 0は自然数ではありません。（入力値: $arg）"
