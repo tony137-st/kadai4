@@ -9,8 +9,10 @@ error_count=0
 # テスト関数
 test-koyakusu() {
     expected=$1
-    num1=$2
-    num2=$3
+    shift
+    num_args=$#
+#num1=$2
+#num2=$3
 
     # 引数の数をチェック（expect なしで num1, num2 のみを確認）
     if [ "$#" -ne 3 ]; then
@@ -20,20 +22,21 @@ test-koyakusu() {
     fi
 
     # koyakusu.sh を実行し、テスト結果とエラーをキャプチャ
-    output=$(bash koyakusu.sh "$num1" "$num2" 2>&1)
+#    output=$(bash koyakusu.sh "$num1" "$num2" 2>&1)
+    output=$(bash koyakusu.sh "$@" 2>&1)
     exit_code=$?
 
     # テスト成功時の結果を抽出
     result=$(echo "$output" | awk '{print $2}')
 
     if [ $exit_code -ne 0 ]; then
-        echo "❌ エラー: KOYAKUSU($num1, $num2) の実行に失敗しました。詳細:"
+        echo "❌ エラー: KOYAKUSU($1, $2) の実行に失敗しました。詳細:"
         echo "$output"
         error_count=$((error_count + 1))
     elif [ "$result" -eq "$expected" ]; then
-        echo "✅ OK: KOYAKUSU($num1, $num2) = $expected"
+        echo "✅ OK: KOYAKUSU($1, $2) = $expected"
     else
-        echo "❌ NG: KOYAKUSU($num1, $num2) の結果が正解値と異なります: $result"
+        echo "❌ NG: KOYAKUSU($1, $2) の結果が正解値と異なります: $result"
         error_count=$((error_count + 1))
     fi
 }
